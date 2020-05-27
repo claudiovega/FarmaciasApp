@@ -1,0 +1,127 @@
+<!doctype html >
+<p>farmacias works!</p>
+<div class="container">
+        <div class="row">
+                <table>
+                    <tr>
+                        <td ><label class="label">Región: </label></td>
+                        <td ><select (change)="filterComunasByRegion($event.target.value)">
+                                <option value="0">Elija Región</option>
+                                <option value="1">Región de Arica</option>
+                                <option value="2">Región de Tarapacá</option>
+                                <option value="3">Región de Antofagasta</option>
+                                <option value="4">Región de Atacama</option>
+                                <option value="5">Región de Coquimbo</option>
+                                <option value="6">Región de Valparaíso</option>
+                                <option value="7">Región Metropolitana</option>
+                                <option value="8">Región del Libertador Bernardo O'Higgins</option>
+                                <option value="9">Región del Maule</option>
+                                <option value="16">Región de Ñuble</option>
+                                <option value="10">Región del Bío Bío</option>
+                                <option value="11">Región de la Araucanía</option>
+                                <option value="12">Región de los Ríos</option>
+                                <option value="13">Región de los Lagos</option>
+                                <option value="14">Región de Aisén</option>
+                                <option value="15">Región de Magallanes</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label">Comunas: </label></td>
+                        <td><select (change)="filterFarmaciasByComuna($event.target.value)">
+                                <option value="0">Elija Comuna</option>
+                                <option *ngFor="let comuna of listaComunasByRegion" value={{comuna.id}}>
+                                        {{comuna.nombre}}
+                                      </option>
+                        </select></td>
+                    </tr>
+
+                </table>
+        </div>
+        <div class="row" *ngIf="comunaSeleccionada">
+                <div class="col-md-12">
+                        <div class="col-md-6">
+                            <input type="radio" value="1" name="optionButton" (click)="optionSelection($event.target.value)"> Búsqueda Farmacia por Combo
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" value="2" name="optionButton" (click)="optionSelection($event.target.value)" > Búsqueda Farmacia por Nombre
+                        </div>
+
+                      
+                </div>
+        </div>
+        <div class="row" *ngIf="mostrarBusquedaPorCombo">
+            <table>
+                <tr>
+                    <td><label class="label">Farmacias: </label></td>
+                    <td><select (change)="selectFarmacia($event.target.value)">
+                            <option value="0">Elija Farmacia</option>
+                            <option *ngFor="let farmacia of listaFarmaciasPorComuna" value={{farmacia.localId}}>
+                                    {{farmacia.localNombre}} - {{farmacia.localDireccion}}
+                                    </option>
+                    </select></td>
+                    
+                </tr>
+            </table>
+        </div>        
+        <div class="row" *ngIf="mostrarBusquedaPorTexto">
+            
+                <table>
+                    <tr>
+                        <td><label class="label">Nombre: </label></td>
+                        <td> <input  type="text"  name="busqueda" [(ngModel)]="busqueda" (ngModelChange)="busqueda = $event" name="busqueda" maxlength="100">
+                        </td>
+                        <td> <button   (click)="buscar()">Buscar</button></td>
+                    </tr>
+                    
+                </table>
+        </div>
+        <p></p>
+        <div class="container" *ngIf="mostrarResultadoCombo" style="align-content: center">
+                <table border="1">
+                        <tr>
+                          <td style="background-color:#bbbce9">Nombre de local:</td>
+                          <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localNombre }}</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:#bbbce9">Dirección:</td>
+                            <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localDireccion }}</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:#bbbce9">Teléfono:</td>
+                            <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localTelefono }}</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:#bbbce9">Latitud:</td>
+                            <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localLat }}</td>
+                        </tr>
+                        <tr>
+                                <td style="background-color:#bbbce9">Longitud:</td>
+                                <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localLng }}</td>
+                            </tr>
+                      </table>
+
+                 
+        </div>
+        <div class="container" *ngIf="mostrarResultadoTexto" style="align-content: center">
+                <table border="1">
+                        <tr>
+                          <td style="background-color:#bbbce9">Nombre de local</td>
+                          <td style="background-color:#bbbce9">Dirección</td>
+                          <td style="background-color:#bbbce9">Teléfono</td>
+                          <td style="background-color:#bbbce9">Latitud</td>
+                          <td style="background-color:#bbbce9">Longitud</td>
+                        </tr>
+                        <tr *ngFor="let farmacia of listaFarmaciasTexto">
+                                <td  style="background-color:#bbbce9">{{ farmacia.localNombre }}</td>
+                                <td  style="background-color:#bbbce9">{{ farmacia.localDireccion }}</td>
+                                <td  style="background-color:#bbbce9">{{ farmacia.localTelefono }}</td>
+                                <td  style="background-color:#bbbce9">{{ farmacia.localLat }}</td>
+                                <td  style="background-color:#bbbce9">{{ farmacia.localLng }}</td>
+                        </tr>
+                      </table>
+
+                 
+        </div>
+    </div>
+    
+
