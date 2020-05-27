@@ -17,10 +17,10 @@ export class FarmaciasServiceService {
           }), observe: 'response'
         });
   }
-  getFarmaciasByComuna(idRegion: any, idComuna: any, nombreFarmacia: any) {
+  getFarmaciasByComuna(idRegion: any, idComuna: any, nombreFarmacia: any, farmaciaTurno: any) {
 
         return this._http.post('http://localhost:8595/farmacias/getFarmacias', JSON.stringify(
-          {idRegion:idRegion, idComuna:idComuna, nombreFarmacia:nombreFarmacia}), {
+          {idRegion:idRegion, idComuna:idComuna, nombreFarmacia:nombreFarmacia, farmaciaTurno:farmaciaTurno}), {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
           }), observe: 'response'

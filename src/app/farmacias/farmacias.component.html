@@ -1,8 +1,27 @@
 <!doctype html >
-<p>farmacias works!</p>
-<div class="container">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<title>Farmacias de Turno</title>
+<h3>Farmacias</h3>
+<div class="container" class="w3-container" style="width: 80%; background-color:#b9bae6; align-content:center">
+    <div class="row"  class="w3-table w3-bordered w3-striped">
+        <div class="col-md-12">
+                <div class="col-md-6">
+                        <input type="radio" value="2" name="optionButtonFiltroInicial" (click)="optionSelectionFiltro($event.target.value)" > Buscar Todas las Farmacias
+                    </div>
+                <div class="col-md-6">
+                    <input type="radio" value="1" name="optionButtonFiltroInicial" (click)="optionSelectionFiltro($event.target.value)"> Buscar Farmacias de Turno
+                </div>
+
+
+              
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="mostrarPanelPrincipal" class="w3-container" style="width: 80%; background-color:#b9bae6; align-content:center">
+
         <div class="row">
-                <table>
+                <table class="w3-table w3-bordered w3-striped"> 
                     <tr>
                         <td ><label class="label">Región: </label></td>
                         <td ><select (change)="filterComunasByRegion($event.target.value)">
@@ -37,7 +56,7 @@
 
                 </table>
         </div>
-        <div class="row" *ngIf="comunaSeleccionada">
+        <div class="row" *ngIf="comunaSeleccionada" class="w3-table w3-bordered w3-striped">
                 <div class="col-md-12">
                         <div class="col-md-6">
                             <input type="radio" value="1" name="optionButton" (click)="optionSelection($event.target.value)"> Búsqueda Farmacia por Combo
@@ -49,7 +68,7 @@
                       
                 </div>
         </div>
-        <div class="row" *ngIf="mostrarBusquedaPorCombo">
+        <div class="row" *ngIf="mostrarBusquedaPorCombo" class="w3-table w3-bordered w3-striped">
             <table>
                 <tr>
                     <td><label class="label">Farmacias: </label></td>
@@ -76,8 +95,8 @@
                 </table>
         </div>
         <p></p>
-        <div class="container" *ngIf="mostrarResultadoCombo" style="align-content: center">
-                <table border="1">
+        <div class="container" *ngIf="mostrarResultadoCombo" class="w3-container" style="width: 50%; background-color:#b9bae6; align-content:center">
+                <table border="1" class="w3-table w3-bordered w3-striped">
                         <tr>
                           <td style="background-color:#bbbce9">Nombre de local:</td>
                           <td  style="background-color:#bbbce9">{{ farmaciaSeleccionada.localNombre }}</td>
@@ -102,8 +121,8 @@
 
                  
         </div>
-        <div class="container" *ngIf="mostrarResultadoTexto" style="align-content: center">
-                <table border="1">
+        <div class="container" *ngIf="mostrarResultadoTexto"  class="w3-container" style="background-color:#b9bae6; align-content:center">
+                <table border="1" class="w3-table w3-bordered w3-striped">
                         <tr>
                           <td style="background-color:#bbbce9">Nombre de local</td>
                           <td style="background-color:#bbbce9">Dirección</td>
@@ -118,10 +137,24 @@
                                 <td  style="background-color:#bbbce9">{{ farmacia.localLat }}</td>
                                 <td  style="background-color:#bbbce9">{{ farmacia.localLng }}</td>
                         </tr>
+                        <tr>
+                            <td style="background-color:#bbbce9"></td>
+                            <td style="background-color:#bbbce9"></td>
+                            <td style="background-color:#bbbce9"></td>
+                            <td style="background-color:#bbbce9"></td>
+                            <td style="background-color:#bbbce9"></td>
+                          </tr>
                       </table>
 
                  
         </div>
+        <div class="container" *ngIf="mostrarError"  class="w3-container" style=" background-color:#b9bae6; align-content:center">
+            <label class="label" style="font-size: 14pt; font-style: italic;">Ocurrió un error al realizar la operación. Por favor intente mas tarde. {{error}} </label>
+        </div>
+        <div class="container" *ngIf="mostrarNoHayRegistros"  class="w3-container" style=" background-color:#b9bae6; align-content:center">
+            <label class="label" style="font-size: 14pt; font-style: italic;">No se encontró Información con los parámetros de búsqueda utilizados.</label>
+        </div>
+        
     </div>
     
 
